@@ -68,4 +68,41 @@ RSpec.describe ChefProvisioner::Chef do
       expect(ChefAPI::Resource::Node.fetch(name)).to be_nil
     end
   end
+
+  context 'bootstrap' do
+    let(:node_name) { 'testnode.testdomain' }
+    let(:environment) { 'testing' }
+    let(:server) { 'http://chef.server.testdomain' }
+    let(:first_boot) { {run_list: ["role[testrole]"], fqdn: node_name } }
+
+    it 'renders the bootstrap template' do
+      match_fixture('bare_bootstrap', ChefProvisioner::Bootstrap.generate())
+    end
+
+    it 'renders the client.pem' do
+      script = ChefProvisioner::Bootstrap.generate(client_pem: OpenSSL::PKey::RSA.new(2048).to_s)
+      expect(script).to include('-----BEGIN RSA PRIVATE KEY-----')
+      expect(script).to include('-----END RSA PRIVATE KEY-----')
+    end
+
+    it 'renders the node_name' do
+      script = ChefProvisioner::Bootstrap.generate(node_name: node_name)
+      expect(script).to include("node_name \"#{node_name}\"")
+    end
+
+    it 'renders the environment' do
+      script = ChefProvisioner::Bootstrap.generate(environment: environment)
+      expect(script).to include("environment      \"#{environment}\"")
+    end
+
+    it 'renders the server' do
+      script = ChefProvisioner::Bootstrap.generate(server: server)
+      expect(script).to include("chef_server_url  \"#{server}\"")
+    end
+
+    it 'renders first_boot attributes' do
+      script = ChefProvisioner::Bootstrap.generate(first_boot: first_boot)
+      expect(script).to include(JSON.pretty_generate(first_boot))
+    end
+  end
 end

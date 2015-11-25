@@ -36,6 +36,12 @@ def with_chef_server
   server.stop
 end
 
+def match_fixture(name, actual)
+  path = File.expand_path("fixtures/#{name}.txt", File.dirname(__FILE__))
+  File.open(path, 'w') { |f| f.write(actual) } if ENV['FIXTURE_RECORD']
+  expect(actual).to eq(File.read(path))
+end
+
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true

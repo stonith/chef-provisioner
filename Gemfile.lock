@@ -15,6 +15,7 @@ PATH
   specs:
     chef-zero-bootstrap (0.0.1)
       chef-api (= 0.5.0)
+      erubis (= 2.7)
 
 GEM
   remote: https://rubygems.org/
@@ -24,6 +25,7 @@ GEM
       mime-types
     diff-lcs (1.2.5)
     docile (1.1.5)
+    erubis (2.7.0)
     ffi-yajl (2.2.2)
       libyajl2 (~> 1.2)
     hashie (2.1.2)

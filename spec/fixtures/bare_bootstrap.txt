@@ -4,13 +4,13 @@ set -x
 set -e
 
 # Install chef
-curl -L https://www.opscode.com/chef/install.sh | sudo bash /dev/stdin -v <%= chef_version %>
+curl -L https://www.opscode.com/chef/install.sh | sudo bash /dev/stdin -v 12.4.1
 rm -rf /etc/chef
 mkdir -p /etc/chef
 
 # Create the node and client writing the private key back here
 cat > /etc/chef/client.pem <<EOF
-<%= client_pem %>
+
 EOF
 
 # Create the initial client spec
@@ -18,14 +18,15 @@ cat > /etc/chef/client.rb <<EOF
 log_level        :info
 log_location     STDOUT
 ssl_verify_mode  :verify_peer
-environment      "<%= environment %>"
-chef_server_url  "<%= server %>"
-node_name "<%= node_name %>"
+environment      "default"
+chef_server_url  "localhost"
+node_name ""
 EOF
 
 # Create the initial chef attributes
 cat > /etc/chef/first_boot.json << EOF
-<%= JSON.pretty_generate(first_boot) %>
+{
+}
 EOF
 
 # Start the chef run

@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
     'http://rubygems.org/gems/chef-zero-bootstrap'
   s.license       = 'MIT'
   s.add_runtime_dependency 'chef-api', ['=0.5.0']
+  s.add_runtime_dependency 'erubis', ['=2.7']
   s.add_development_dependency 'rake', ['=10.4.2']
   s.add_development_dependency 'simplecov', ['=0.10.0']
   s.add_development_dependency 'rspec', ['=3.2.0']
