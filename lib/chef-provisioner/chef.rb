@@ -3,7 +3,7 @@ require 'json'
 require 'fileutils'
 require 'chef-api'
 
-module ChefZeroBootstrap
+module ChefProvisioner
   # Simple API to access chef server to manage clients and nodes
   module Chef
     extend self

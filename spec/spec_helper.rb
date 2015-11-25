@@ -6,7 +6,7 @@ require 'chef_zero/server'
 require 'tempfile'
 require 'openssl'
 
-require File.expand_path('../../lib/chef-zero-bootstrap.rb', __FILE__)
+require File.expand_path('../../lib/chef-provisioner.rb', __FILE__)
 
 # Start a chef server arround chef tests
 module ChefSpec
@@ -22,12 +22,11 @@ module ChefSpec
 end
 
 def setup_chef_client
-  client_file = Tempfile.new('chef-zero-bootstrap-client')
+  client_file = Tempfile.new('chef-provisioner-client')
   client_file.write(OpenSSL::PKey::RSA.new(2048).to_s)
   client_file.close
-  ChefZeroBootstrap::Chef.configure(endpoint: "http://#{Socket.gethostname}:5000", key_path: client_file.path, client: 'test')
+  ChefProvisioner::Chef.configure(endpoint: "http://#{Socket.gethostname}:5000", key_path: client_file.path, client: 'test')
 end
-
 
 def with_chef_server
   setup_chef_client
