@@ -73,10 +73,10 @@ RSpec.describe ChefProvisioner::Chef do
     let(:node_name) { 'testnode.testdomain' }
     let(:environment) { 'testing' }
     let(:server) { 'http://chef.server.testdomain' }
-    let(:first_boot) { {run_list: ["role[testrole]"], fqdn: node_name } }
+    let(:first_boot) { { run_list: ['role[testrole]'], fqdn: node_name } }
 
     it 'renders the bootstrap template' do
-      match_fixture('bare_bootstrap', ChefProvisioner::Bootstrap.generate())
+      match_fixture('bare_bootstrap', ChefProvisioner::Bootstrap.generate)
     end
 
     it 'renders the client.pem' do
