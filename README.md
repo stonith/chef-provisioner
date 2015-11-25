@@ -1,4 +1,4 @@
-![travis badge](https://travis-ci.org/dalehamel/chef-zero-bootstrap.svg)
+![travis badge](https://travis-ci.org/dalehamel/chef-provisioner.svg)
 
 # Chef zero bootstrap
 
