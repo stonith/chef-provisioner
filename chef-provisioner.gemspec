@@ -3,7 +3,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'chef-provisioner/version'
 
 Gem::Specification.new do |s|
-  s.name        = 'chef-zero-bootstrap'
+  s.name        = 'chef-provisioner'
   s.version     = ChefProvisioner::VERSION
   s.date        = '2015-11-24'
   s.summary     = 'Bootstrap against a chef-zero server'
