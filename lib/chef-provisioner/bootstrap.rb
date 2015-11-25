@@ -13,7 +13,7 @@ module ChefProvisioner
       node_name = node_name.strip
       server = ChefAPI.endpoint if server.empty?
       client_pem = ChefProvisioner::Chef.init_server(node_name)
-      first_boot.merge!( fqdn: node_name )
+      first_boot.merge!( fqdn: node_name, override_attributes: {chef_client: {config: {chef_server_url: server}}} )
       render(node_name: node_name, client_pem: client_pem, chef_version: chef_version, environment: environment, server: server, first_boot: first_boot)
     end
 
