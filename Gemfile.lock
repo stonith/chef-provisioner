@@ -1,0 +1,68 @@
+GIT
+  remote: https://github.com/terceiro/chef-zero
+  revision: 08bc88af9d9482ef28c06e6e89d335604a99493f
+  ref: remove-chef-dep
+  specs:
+    chef-zero (4.2.2)
+      ffi-yajl (>= 1.1, < 3.0)
+      hashie (~> 2.0)
+      mixlib-log (~> 1.3)
+      rack
+      uuidtools (~> 2.1)
+
+PATH
+  remote: .
+  specs:
+    chef-zero-bootstrap (0.0.1)
+      chef-api (= 0.5.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    chef-api (0.5.0)
+      logify (~> 0.1)
+      mime-types
+    diff-lcs (1.2.5)
+    docile (1.1.5)
+    ffi-yajl (2.2.2)
+      libyajl2 (~> 1.2)
+    hashie (2.1.2)
+    json (1.8.3)
+    libyajl2 (1.2.0)
+    logify (0.2.0)
+    mime-types (2.6.2)
+    mixlib-log (1.6.0)
+    rack (1.6.4)
+    rake (10.4.2)
+    rspec (3.2.0)
+      rspec-core (~> 3.2.0)
+      rspec-expectations (~> 3.2.0)
+      rspec-mocks (~> 3.2.0)
+    rspec-core (3.2.3)
+      rspec-support (~> 3.2.0)
+    rspec-expectations (3.2.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.2.0)
+    rspec-mocks (3.2.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.2.0)
+    rspec-support (3.2.2)
+    simplecov (0.10.0)
+      docile (~> 1.1.0)
+      json (~> 1.8)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.0)
+    uuidtools (2.1.5)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  chef-zero!
+  chef-zero-bootstrap!
+  rake (= 10.4.2)
+  rspec (= 3.2.0)
+  simplecov (= 0.10.0)
+
+BUNDLED WITH
+   1.10.6
