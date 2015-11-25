@@ -95,6 +95,11 @@ RSpec.describe ChefProvisioner::Chef do
       expect(script).to include("environment      \"#{environment}\"")
     end
 
+    it 'does not require an environment' do
+      script = ChefProvisioner::Bootstrap.generate(node_name: node_name)
+      expect(script).to_not include("environment")
+    end
+
     it 'renders the server' do
       script = ChefProvisioner::Bootstrap.generate(node_name: node_name, server: server)
       expect(script).to include("chef_server_url  \"#{server}\"")
