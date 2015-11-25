@@ -1,4 +1,4 @@
 # Namespace for our gem
 module ChefProvisioner
-  VERSION = '0.0.1'
+  VERSION = '0.0.2'
 end
