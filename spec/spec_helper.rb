@@ -29,7 +29,6 @@ def setup_chef_client
 end
 
 def with_chef_server
-  setup_chef_client
   server = ChefZero::Server.new(host: '0.0.0.0', port: 5000)
   server.start_background
   yield

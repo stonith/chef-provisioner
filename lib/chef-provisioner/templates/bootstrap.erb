@@ -18,7 +18,7 @@ cat > /etc/chef/client.rb <<EOF
 log_level        :info
 log_location     STDOUT
 ssl_verify_mode  :verify_peer
-environment      "<%= environment %>"
+<%="environment      \"#{environment}\"" if environment %>
 chef_server_url  "<%= server %>"
 node_name "<%= node_name %>"
 EOF
