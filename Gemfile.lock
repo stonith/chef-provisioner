@@ -13,7 +13,7 @@ GIT
 PATH
   remote: .
   specs:
-    chef-zero-bootstrap (0.0.1)
+    chef-provisioner (0.0.1)
       chef-api (= 0.5.0)
       erubis (= 2.7)
 
@@ -60,8 +60,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  chef-provisioner!
   chef-zero!
-  chef-zero-bootstrap!
   rake (= 10.4.2)
   rspec (= 3.2.0)
   simplecov (= 0.10.0)

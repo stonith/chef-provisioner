@@ -75,12 +75,8 @@ RSpec.describe ChefProvisioner::Chef do
     let(:server) { 'http://chef.server.testdomain' }
     let(:first_boot) { { run_list: ['role[testrole]'], fqdn: node_name } }
 
-    it 'renders the bootstrap template' do
-      match_fixture('bare_bootstrap', ChefProvisioner::Bootstrap.generate)
-    end
-
     it 'renders the client.pem' do
-      script = ChefProvisioner::Bootstrap.generate(client_pem: OpenSSL::PKey::RSA.new(2048).to_s)
+      script = ChefProvisioner::Bootstrap.generate(node_name: node_name)
       expect(script).to include('-----BEGIN RSA PRIVATE KEY-----')
       expect(script).to include('-----END RSA PRIVATE KEY-----')
     end
@@ -91,17 +87,17 @@ RSpec.describe ChefProvisioner::Chef do
     end
 
     it 'renders the environment' do
-      script = ChefProvisioner::Bootstrap.generate(environment: environment)
+      script = ChefProvisioner::Bootstrap.generate(node_name: node_name, environment: environment)
       expect(script).to include("environment      \"#{environment}\"")
     end
 
     it 'renders the server' do
-      script = ChefProvisioner::Bootstrap.generate(server: server)
+      script = ChefProvisioner::Bootstrap.generate(node_name: node_name, server: server)
       expect(script).to include("chef_server_url  \"#{server}\"")
     end
 
     it 'renders first_boot attributes' do
-      script = ChefProvisioner::Bootstrap.generate(first_boot: first_boot)
+      script = ChefProvisioner::Bootstrap.generate(node_name: node_name, first_boot: first_boot)
       expect(script).to include(JSON.pretty_generate(first_boot))
     end
   end
