@@ -100,5 +100,10 @@ RSpec.describe ChefProvisioner::Chef do
       script = ChefProvisioner::Bootstrap.generate(node_name: node_name, first_boot: first_boot)
       expect(script).to include(JSON.pretty_generate(first_boot))
     end
+
+    it 'does not propagate whitespace in node name' do
+      script = ChefProvisioner::Bootstrap.generate(node_name: " \t #{node_name} \t \n ")
+      expect(script).to_not match(/node_name "\s+#{node_name}\s+"/)
+    end
   end
 end
