@@ -12,7 +12,7 @@ module ChefProvisioner
       ChefAPI.configure do |config|
         config.endpoint = kwargs[:endpoint]
         config.client = kwargs[:client]
-        config.key = kwargs[:key_path]
+        config.key = kwargs[:key_text] || File.read(kwargs[:key_path])
       end
     end
 

@@ -4,10 +4,6 @@ RSpec.describe ChefProvisioner::Chef do
   include ChefSpec
   let(:name) { 'test' }
 
-  before :all do
-    setup_chef_client
-  end
-
   context 'clients' do
     it 'creates clients' do
       ChefProvisioner::Chef.create_client(name)

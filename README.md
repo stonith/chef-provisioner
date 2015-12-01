@@ -9,7 +9,7 @@ At the minimum
 ```
 require 'chef-provisioner'
 
-ChefProvisioner::Chef.configure(endpoint: 'https://my.awesome.chef.server', key_path: client_pem_path, client: 'your_client_name')
+ChefProvisioner::Config.setup(server: 'https://my.awesome.chef.server', client_key_path: client_pem_path, client: 'your_client_name')
 
 script = ChefProvisioner::Bootstrap.generate(
   node_name: 'foo.bar.mydomain'

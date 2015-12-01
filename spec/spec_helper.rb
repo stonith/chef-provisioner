@@ -5,6 +5,7 @@ require 'chef_zero/server'
 
 require 'tempfile'
 require 'openssl'
+require 'uri/generic'
 
 require File.expand_path('../../lib/chef-provisioner.rb', __FILE__)
 
@@ -21,15 +22,10 @@ module ChefSpec
   end
 end
 
-def setup_chef_client
-  client_file = Tempfile.new('chef-provisioner-client')
-  client_file.write(OpenSSL::PKey::RSA.new(2048).to_s)
-  client_file.close
-  ChefProvisioner::Chef.configure(endpoint: "http://#{Socket.gethostname}:5000", key_path: client_file.path, client: 'test')
-end
-
 def with_chef_server
-  server = ChefZero::Server.new(host: '0.0.0.0', port: 5000)
+  ChefProvisioner::Config.setup
+  uri = URI(ChefProvisioner::Config.server)
+  server = ChefZero::Server.new(host: uri.host, port: uri.port)
   server.start_background
   yield
   server.stop
