@@ -4,7 +4,7 @@ set -x
 set -e
 
 # Install chef
-<%= "[ -z \"$(dpkg -s chef | grep 'ok installed')\" ] &&" unless force_install %> curl -L https://www.opscode.com/chef/install.sh | sudo bash /dev/stdin -v <%= chef_version %>
+<%= "dpkg -s chef | grep -q 'ok installed' ||" unless force_install %>curl -L https://www.opscode.com/chef/install.sh | sudo bash /dev/stdin -v <%= chef_version %>
 rm -rf /etc/chef
 mkdir -p /etc/chef
 
