@@ -27,7 +27,7 @@ module ChefProvisioner
     end
 
     def my_ip
-      Socket.ip_address_list.find{|x| x.ipv4? && !x.ipv4_loopback?}.ip_address
+      Socket.ip_address_list.find{|x| x.ipv4? && !x.ipv4_loopback? && !x.ip_address.start_with?('169.254')}.ip_address
     end
 
     def setup_chef_client_file
