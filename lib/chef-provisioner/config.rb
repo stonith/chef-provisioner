@@ -9,8 +9,8 @@ module ChefProvisioner
 
     attr_reader :server, :client_key, :client
 
-    def setup(server: nil, client_key: nil, client_key_path: nil, client: nil)
-      @server = server || "http://#{my_ip}:#{get_free_port}"
+    def setup(server: nil, client_key: nil, client_key_path: nil, client: nil, listen: nil)
+      @server = server || "http://#{listen || my_ip}:#{get_free_port}"
       @client_key = client_key || client_key_path || setup_chef_client_file
       @client = client || 'testing-client'
       ChefProvisioner::Chef.configure(endpoint: @server, key_path: @client_key, client: @client)
