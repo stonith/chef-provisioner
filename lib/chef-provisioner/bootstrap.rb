@@ -7,7 +7,7 @@ module ChefProvisioner
   # Help render the bootstrap script
   module Bootstrap
     extend self
-    BOOTSTRAP_TEMPLATE = File.read(File.expand_path('../../chef-provisioner/templates/bootstrap.erb', __FILE__)).freeze
+    BOOTSTRAP_TEMPLATE = File.read(File.expand_path('../templates/bootstrap.erb', __FILE__)).freeze
 
     def generate(node_name: '', chef_version: '12.4.1', environment: nil, server: '', first_boot: {}, reinstall: false)
       node_name = node_name.strip
