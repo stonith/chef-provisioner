@@ -16,9 +16,10 @@ module ChefProvisioner
       end
     end
 
-    def init_server(name, attributes:{}, run_list:[])
-      key = create_client(name)
-      create_node(name, attributes: attributes, run_list: run_list)
+    def init_server(name, attributes:{}, run_list:[], force: false)
+      nuke(name) if force
+      key = create_client(name) || ''
+      create_node(name, attributes: attributes, run_list: run_list) unless key.empty?
       key
     end
 
