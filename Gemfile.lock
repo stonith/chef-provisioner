@@ -13,7 +13,7 @@ GIT
 PATH
   remote: .
   specs:
-    chef-provisioner (0.1.6)
+    chef-provisioner (0.1.7)
       chef-api (= 0.5.0)
       erubis (= 2.7)
 
