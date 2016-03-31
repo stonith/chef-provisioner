@@ -16,7 +16,7 @@ module ChefProvisioner
       run_list = first_boot['run_list'] if first_boot['run_list']
       first_boot.merge!( fqdn: node_name, chef_client: {config: {chef_server_url: server}} )
       client_pem = get_client_key(node_name, run_list, force, retries)
-      render(node_name: node_name, client_pem: client_pem, chef_version: chef_version, environment: environment, server: server, first_boot: first_boot, reinstall: reinstall, audit: audit)
+      render(node_name: node_name, client_pem: client_pem, chef_version: chef_version, environment: environment, server: server, first_boot: first_boot, reinstall: reinstall, audit: audit, chef_cmd: chef_cmd)
     end
 
     private
