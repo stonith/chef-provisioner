@@ -9,7 +9,7 @@ module ChefProvisioner
     extend self
     BOOTSTRAP_TEMPLATE = File.read(File.expand_path('../templates/bootstrap.erb', __FILE__)).freeze
 
-    def generate(node_name: '', chef_version: '12.4.1', environment: nil, server: '', first_boot: {}, reinstall: false, audit: false, force: false, retries: 0, chef_cmd: nil)
+    def generate(node_name: '', chef_version: '12.4.1', environment: nil, server: '', first_boot: {}, reinstall: false, audit: false, force: false, retries: 1, chef_cmd: nil)
       node_name = node_name.strip
       server = ChefAPI.endpoint if server.empty?
       run_list = first_boot[:run_list] if first_boot[:run_list] # FIXME - symbolize keys instead of the dup here
