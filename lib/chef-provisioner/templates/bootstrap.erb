@@ -29,4 +29,8 @@ cat > /etc/chef/first_boot.json << EOF
 EOF
 
 # Start the chef run
+<% if chef_cmd %>
+<%= chef_cmd %>
+<% else %>
 chef-client -c /etc/chef/client.rb -j /etc/chef/first_boot.json <%= "--audit-mode enabled" if audit %> <%= "| tee -a #{logfile}" if logfile %>
+<% end %>
