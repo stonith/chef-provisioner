@@ -16,10 +16,10 @@ module ChefProvisioner
       end
     end
 
-    def init_server(name, attributes:{}, run_list:[], force: false)
+    def init_server(name, environment: '_default', attributes:{}, run_list:[], force: false)
       nuke(name) if force
       key = create_client(name) || ''
-      create_node(name, attributes: attributes, run_list: run_list) unless key.empty?
+      create_node(name, environment, attributes: attributes, run_list: run_list) unless key.empty?
       key
     end
 
@@ -31,8 +31,9 @@ module ChefProvisioner
       puts e.message
     end
 
-    def create_node(name, attributes:{}, run_list:[])
+    def create_node(name, environment, attributes:{}, run_list:[])
       node = ChefAPI::Resource::Node.create(name: name, run_list: run_list)
+      node.chef_environment = environment
       node.automatic = attributes['automatic'] || {}
       node.default = attributes['default'] || {}
       node.normal = attributes['normal'] || {}

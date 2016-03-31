@@ -3,6 +3,7 @@ require File.expand_path('../../spec_helper.rb', __FILE__)
 RSpec.describe ChefProvisioner::Chef do
   include ChefSpec
   let(:name) { 'test' }
+  let(:environment) { 'testing' }
 
   context 'clients' do
     it 'creates clients' do
@@ -32,21 +33,21 @@ RSpec.describe ChefProvisioner::Chef do
 
   context 'nodes' do
     it 'creates nodes' do
-      ChefProvisioner::Chef.create_node(name)
+      ChefProvisioner::Chef.create_node(name, environment)
       expect(ChefAPI::Resource::Node.fetch(name).name).to eq(name)
     end
 
     it 'destroys nodes' do
-      ChefProvisioner::Chef.create_node(name)
+      ChefProvisioner::Chef.create_node(name, environment)
       expect(ChefAPI::Resource::Node.fetch(name).name).to eq(name)
       ChefProvisioner::Chef.delete_node(name)
       expect(ChefAPI::Resource::Node.fetch(name)).to be_nil
     end
 
     it 'fails creation gracefully' do
-      ChefProvisioner::Chef.create_node(name)
+      ChefProvisioner::Chef.create_node(name, environment)
       expect(ChefAPI::Resource::Node.fetch(name).name).to eq(name)
-      expect { ChefProvisioner::Chef.create_node(name) }.to output(/Failed to create node/).to_stdout
+      expect { ChefProvisioner::Chef.create_node(name, environment) }.to output(/Failed to create node/).to_stdout
     end
   end
 
