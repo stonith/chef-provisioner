@@ -32,5 +32,8 @@ EOF
 <% if chef_cmd %>
 <%= chef_cmd %>
 <% else %>
-chef-client -c /etc/chef/client.rb -j /etc/chef/first_boot.json <%= "--audit-mode enabled" if audit %> <%= "| tee -a #{logfile}" if logfile %>
+chef-client -c /etc/chef/client.rb -j /etc/chef/first_boot.json \
+<%= "--audit-mode enabled" if audit %> \
+<%= "--profile-ruby" if profile %> \
+<%= "| tee -a #{logfile}" if logfile %>
 <% end %>
