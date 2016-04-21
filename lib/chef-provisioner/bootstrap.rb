@@ -15,8 +15,8 @@ module ChefProvisioner
       run_list = first_boot[:run_list] if first_boot[:run_list] # FIXME - symbolize keys instead of the dup here
       run_list = first_boot['run_list'] if first_boot['run_list']
       first_boot.merge!( fqdn: node_name, chef_client: {config: {chef_server_url: server}} )
-      client_pem = get_client_key(node_name, run_list, force, retries)
-      render(node_name: node_name, client_pem: client_pem, chef_version: chef_version, environment: environment, server: server, first_boot: first_boot, reinstall: reinstall, audit: audit, profile: profile)
+      client_pem = get_client_key(node_name, environment, run_list, force, retries)
+      render(node_name: node_name, client_pem: client_pem, chef_version: chef_version, environment: environment, server: server, first_boot: first_boot, reinstall: reinstall, audit: audit, chef_cmd: chef_cmd, profile: profile)
     end
 
     private
@@ -25,11 +25,11 @@ module ChefProvisioner
       ERB.new(BOOTSTRAP_TEMPLATE).result(OpenStruct.new(**kwargs).instance_eval { binding })
     end
 
-    def get_client_key(node_name, run_list, force, retries)
+    def get_client_key(node_name, environment, run_list, force, retries)
       client_pem = ''
       attempts = 0
       while client_pem.empty? && attempts < retries
-        client_pem = ChefProvisioner::Chef.init_server(node_name, run_list: (run_list || []), force: force)
+        client_pem = ChefProvisioner::Chef.init_server(node_name, environment: environment, run_list: (run_list || []), force: force)
         attempts += 1
         sleep(5)
       end
