@@ -39,3 +39,4 @@ Note:
 * first\_boot will automatically get 'fqdn' set to 'node\_name'
 * The bootstrap server is set automatically from the Chef endpoint
 * Node names are trimmed of leading and trailing whitespace
+* A custom bootstrap template can be specified by using `boostrap_file: 'path_to_bootstrap_file'` in `ChefProvisioner::Bootstrap.generate`
