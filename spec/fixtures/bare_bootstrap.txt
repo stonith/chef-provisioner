@@ -19,7 +19,7 @@ log_level        :info
 log_location     STDOUT
 ssl_verify_mode  :verify_peer
 environment      "default"
-chef_server_url  "localhost"
+chef_server_url  "127.0.0.1"
 node_name ""
 EOF
 
